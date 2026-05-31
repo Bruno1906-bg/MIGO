@@ -37,7 +37,7 @@ body {
 .Anuncio1 {
     height: 70vh;
     background: linear-gradient(rgba(1, 22, 39, 0.5), rgba(1, 22, 39, 0.5)),
-    url('/img/imagen1.jpg');
+    url('../../img/imagen1.jpg');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -52,7 +52,7 @@ body {
 .Anuncio2 {
     height: 70vh;
     background: linear-gradient(rgba(1, 22, 39, 0.5), rgba(1, 22, 39, 0.5)),
-    url('/img/imagen2.jpg');
+    url('../../img/imagen2.jpg');
     background-size: cover;
     background-position: center;
     display: flex;

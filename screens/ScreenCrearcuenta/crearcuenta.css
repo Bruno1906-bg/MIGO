@@ -88,6 +88,51 @@ body {
     border-color: #2EC4B6;
 }
 
+.input-group input:invalid {
+    border-color: rgba(255, 99, 71, 0.45);
+}
+
+.colonia-search {
+    position: relative;
+}
+
+.colonia-suggestions {
+    position: absolute;
+    z-index: 20;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border: 1px solid rgba(1, 22, 39, 0.12);
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(1, 22, 39, 0.12);
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.colonia-option {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    color: #011627;
+    text-align: left;
+    padding: 12px 14px;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.colonia-option:hover,
+.colonia-option[aria-selected="true"] {
+    background: rgba(46, 196, 182, 0.12);
+}
+
+.field-hint {
+    display: block;
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: rgba(1, 22, 39, 0.58);
+}
+
 .btn-register {
     width: 100%;
     background-color: #2EC4B6;
@@ -104,6 +149,21 @@ body {
 .btn-register:hover {
     background-color: #249c91;
     transform: scale(1.02);
+}
+
+.form-message {
+    min-height: 1.2rem;
+    margin-top: 16px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.form-message.success {
+    color: #1f8a70;
+}
+
+.form-message.error {
+    color: #c0392b;
 }
 
 .register-footer {

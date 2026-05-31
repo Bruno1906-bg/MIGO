@@ -77,6 +77,10 @@ body {
     border-color: #2EC4B6;
 }
 
+.input-group input:invalid {
+    border-color: rgba(255, 99, 71, 0.45);
+}
+
 .form-actions {
     display: flex;
     justify-content: flex-end;
@@ -110,6 +114,21 @@ body {
 .btn-login:hover {
     background-color: #249c91;
     transform: scale(1.02);
+}
+
+.form-message {
+    min-height: 1.2rem;
+    margin-top: 16px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.form-message.success {
+    color: #1f8a70;
+}
+
+.form-message.error {
+    color: #c0392b;
 }
 
 .login-footer {
