@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MIGO || Iniciar Sesión</title>
     <link rel="stylesheet" href="login.css">
-    <script src="../../js/auth.js" defer></script>
+    <script src="../../js/auth.js?v=20260531" defer></script>
 </head>
 <body>
 
@@ -24,7 +24,10 @@
 
         <div class="input-group">
             <label for="password">Contraseña</label>
-            <input type="password" id="password" placeholder="Ingresa tu contraseña." minlength="8" required>
+            <div class="password-field">
+                <input type="password" id="password" placeholder="Ingresa tu contraseña." minlength="8" required>
+                <button type="button" class="password-toggle" data-password-toggle="password" aria-pressed="false"></button>
+            </div>
         </div>
 
         <button type="submit" class="btn-login">Iniciar Sesión</button>

@@ -5,6 +5,8 @@
     const registerForm = document.getElementById('register-form');
 
     const coloniaData = [];
+    let coloniasLoadPromise = null;
+    const messageTimers = new Map();
 
     const normalizeText = (value) => (value || '').trim().toLowerCase();
 
@@ -16,10 +18,26 @@
             return;
         }
 
+        const previousTimer = messageTimers.get(formType);
+        if (previousTimer) {
+            window.clearTimeout(previousTimer);
+            messageTimers.delete(formType);
+        }
+
         messageElement.textContent = text;
         messageElement.classList.remove('success', 'error');
         if (type) {
             messageElement.classList.add(type);
+        }
+
+        if (text) {
+            const timerId = window.setTimeout(() => {
+                messageElement.textContent = '';
+                messageElement.classList.remove('success', 'error');
+                messageTimers.delete(formType);
+            }, 2000);
+
+            messageTimers.set(formType, timerId);
         }
     };
 
@@ -78,6 +96,77 @@
 
     const getSelectedColonias = () => coloniaData.slice();
 
+    const loadAllColonias = async () => {
+        const colonias = [];
+        let nextUrl = `${API_BASE_URL}/colonias/?limit=1000`;
+        let guard = 0;
+
+        while (nextUrl && guard < 20) {
+            const payload = await fetchJson(nextUrl);
+            colonias.push(...toColonias(payload));
+
+            const nextLink = Array.isArray(payload?.links)
+                ? payload.links.find((link) => link?.rel === 'next')?.href
+                : null;
+
+            nextUrl = nextLink || null;
+            guard += 1;
+        }
+
+        const uniqueColonias = new Map();
+        colonias.forEach((item) => {
+            uniqueColonias.set(item.id_colonia, item);
+        });
+
+        return [...uniqueColonias.values()];
+    };
+
+    const ensureColoniasLoaded = () => {
+        if (!coloniasLoadPromise) {
+            coloniasLoadPromise = loadAllColonias()
+                .then((colonias) => {
+                    coloniaData.splice(0, coloniaData.length, ...colonias);
+                    return coloniaData;
+                })
+                .catch(() => {
+                    coloniaData.splice(0, coloniaData.length);
+                    return coloniaData;
+                });
+        }
+
+        return coloniasLoadPromise;
+    };
+
+    const isValidEmail = (value) => {
+        const text = String(value || '').trim();
+        return text.includes('@') && text.indexOf('@') > 0 && text.indexOf('@') < text.length - 1;
+    };
+
+    const setupPasswordToggle = () => {
+        document.querySelectorAll('[data-password-toggle]').forEach((button) => {
+            const targetId = button.getAttribute('data-password-toggle');
+            const input = targetId ? document.getElementById(targetId) : null;
+
+            if (!input) {
+                return;
+            }
+
+            const sync = () => {
+                const visible = input.type === 'text';
+                button.setAttribute('aria-pressed', String(visible));
+                button.setAttribute('aria-label', visible ? 'Ocultar contraseña' : 'Ver contraseña');
+                button.dataset.state = visible ? 'visible' : 'hidden';
+            };
+
+            button.addEventListener('click', () => {
+                input.type = input.type === 'password' ? 'text' : 'password';
+                sync();
+            });
+
+            sync();
+        });
+    };
+
     const setupColoniaSearch = async () => {
         const coloniaInput = document.getElementById('colonia');
         const coloniaHidden = document.getElementById('id_colonia');
@@ -97,9 +186,10 @@
 
         const renderSuggestions = (query) => {
             const text = normalizeText(query);
-            const matches = getSelectedColonias().filter((item) =>
+            const filteredColonias = getSelectedColonias().filter((item) =>
                 !text || normalizeText(item.nombre_colonia).includes(text)
             );
+            const matches = filteredColonias.length > 0 ? filteredColonias : getSelectedColonias();
 
             suggestionsElement.innerHTML = '';
 
@@ -107,6 +197,13 @@
                 suggestionsElement.hidden = true;
                 coloniaInput.setAttribute('aria-expanded', 'false');
                 return;
+            }
+
+            if (text && filteredColonias.length === 0) {
+                const emptyState = document.createElement('div');
+                emptyState.className = 'colonia-empty';
+                emptyState.textContent = 'No hay coincidencias. Puedes elegir una colonia de la lista.';
+                suggestionsElement.appendChild(emptyState);
             }
 
             matches.slice(0, 8).forEach((item, index) => {
@@ -131,6 +228,14 @@
             coloniaInput.setAttribute('aria-expanded', 'true');
         };
 
+        const refreshSuggestions = () => {
+            void ensureColoniasLoaded().then(() => {
+                if (document.activeElement === coloniaInput || coloniaInput.value.trim()) {
+                    renderSuggestions(coloniaInput.value);
+                }
+            });
+        };
+
         const syncHiddenColonia = () => {
             const enteredValue = normalizeText(coloniaInput.value);
             const exactMatch = getSelectedColonias().find((item) => normalizeText(item.nombre_colonia) === enteredValue);
@@ -141,11 +246,11 @@
 
         coloniaInput.addEventListener('input', () => {
             coloniaHidden.value = '';
-            renderSuggestions(coloniaInput.value);
+            refreshSuggestions();
         });
 
         coloniaInput.addEventListener('focus', () => {
-            renderSuggestions(coloniaInput.value);
+            refreshSuggestions();
         });
 
         coloniaInput.addEventListener('blur', () => {
@@ -162,6 +267,8 @@
                 coloniaInput.setAttribute('aria-expanded', 'false');
             }
         });
+
+        refreshSuggestions();
     };
 
     const validatePasswordLength = (value) => String(value || '').length >= 8;
@@ -175,6 +282,11 @@
 
         if (!correo || !contrasena) {
             setMessage('login', 'Completa correo y contraseña.', 'error');
+            return;
+        }
+
+        if (!isValidEmail(correo)) {
+            setMessage('login', 'Escribe un correo válido que incluya @.', 'error');
             return;
         }
 
@@ -236,6 +348,11 @@
             return;
         }
 
+        if (!isValidEmail(correo)) {
+            setMessage('register', 'Escribe un correo válido que incluya @.', 'error');
+            return;
+        }
+
         if (!validatePasswordLength(contrasena)) {
             setMessage('register', 'La contraseña debe tener al menos 8 caracteres.', 'error');
             return;
@@ -281,40 +398,10 @@
         }
     };
 
-    const loadAllColonias = async () => {
-        const colonias = [];
-        let nextUrl = `${API_BASE_URL}/colonias/?limit=1000`;
-        let guard = 0;
-
-        while (nextUrl && guard < 20) {
-            const payload = await fetchJson(nextUrl);
-            colonias.push(...toColonias(payload));
-
-            const nextLink = Array.isArray(payload?.links)
-                ? payload.links.find((link) => link?.rel === 'next')?.href
-                : null;
-
-            nextUrl = nextLink || null;
-            guard += 1;
-        }
-
-        const uniqueColonias = new Map();
-        colonias.forEach((item) => {
-            uniqueColonias.set(item.id_colonia, item);
-        });
-
-        return [...uniqueColonias.values()];
-    };
-
     const initialize = async () => {
-        try {
-            const colonias = await loadAllColonias();
-            coloniaData.splice(0, coloniaData.length, ...colonias);
-        } catch {
-            coloniaData.splice(0, coloniaData.length);
-        }
-
         await setupColoniaSearch();
+        setupPasswordToggle();
+        void ensureColoniasLoaded();
 
         if (loginForm) {
             loginForm.addEventListener('submit', handleLogin);
