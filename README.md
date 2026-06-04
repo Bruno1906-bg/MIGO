@@ -40,6 +40,9 @@ https://universi799-my.sharepoint.com/:w:/g/personal/2402137_utrivieramaya_edu_m
 
 https://www.figma.com/design/nCnZo8WIk8Tdqsu60nVrwZ/Wireframes?node-id=0-1&p=f&t=vqyf1YhMBRUs2gK9-0
 
+-Sketches del diseño-
+
+<img width="900" height="1600" alt="Sketches-Migo" src="https://github.com/user-attachments/assets/03b7e0de-56f5-470c-aa85-ee2ea8da9acb" />
 
 -Plantilla de reuniones SCRUM-
 
