@@ -21,7 +21,7 @@ https://universi799-my.sharepoint.com/:x:/g/personal/2402044_utrivieramaya_edu_m
 
 -Metricas y Parametros en EXCEL-
 
-[ACT2-DASHBOARD METRICAS PRODUCTIVIDAD EQUIPO.xlsm](https://github.com/user-attachments/files/28611564/ACT2-DASHBOARD.METRICAS.PRODUCTIVIDAD.EQUIPO.xlsm)
+[ACT2-DASHBOARD METRICAS PRODUCTIVIDAD EQUIPO.xlsm](https://github.com/user-attachments/files/28616776/ACT2-DASHBOARD.METRICAS.PRODUCTIVIDAD.EQUIPO.xlsm)
 
 -Plantilla IEEE8.30/Requerimientos-
 
@@ -42,7 +42,7 @@ https://www.figma.com/design/nCnZo8WIk8Tdqsu60nVrwZ/Wireframes?node-id=0-1&p=f&t
 
 -Sketches del diseño-
 
-<img width="900" height="1600" alt="Sketches-Migo" src="https://github.com/user-attachments/assets/03b7e0de-56f5-470c-aa85-ee2ea8da9acb" />
+<img width="900" height="1200" alt="Sketches-Migo" src="https://github.com/user-attachments/assets/03b7e0de-56f5-470c-aa85-ee2ea8da9acb" />
 
 -Plantilla de reuniones SCRUM-
 
