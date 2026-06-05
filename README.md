@@ -69,6 +69,14 @@ https://universi799-my.sharepoint.com/:w:/g/personal/2402044_
 [Frontend](https://github.com/Bruno1906-bg/MIGO)
 [Backend](https://github.com/2402015-crypto/Migo_Backend)
 
+-Actividades con el profe Giovanny-
+
+[ACT5- DASHBOARD METRICAS PRODUCTIVIDAD - Migo (1).pdf](https://github.com/user-attachments/files/28622184/ACT5-.DASHBOARD.METRICAS.PRODUCTIVIDAD.-.Migo.1.pdf)
+
+[ACT4-METRICAS GESTION DE PROYECTO - Migo - V1 (1).pdf](https://github.com/user-attachments/files/28622187/ACT4-METRICAS.GESTION.DE.PROYECTO.-.Migo.-.V1.1.pdf)
+
+[ACT3-Metodología de desarrollo y planeación inicial de un proyecto (2).pdf](https://github.com/user-attachments/files/28622186/ACT3-Metodologia.de.desarrollo.y.planeacion.inicial.de.un.proyecto.2.pdf)
+
 
 
 
