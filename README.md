@@ -34,7 +34,7 @@ https://universi799-my.sharepoint.com/:w:/g/personal/2402137_utrivieramaya_edu_m
 
 -Modelo de negocio Migo-
 
-<img width="1600" height="1200" alt="Modelo_Negocio_Migo" src="https://github.com/user-attachments/assets/1a91b1cf-cc21-4db1-872b-5932dc892e7b" />
+<img width="1141" height="817" alt="Modelo_Negocio_MIGO" src="https://github.com/user-attachments/assets/b293a268-758c-45c3-a598-8ee1e5154b9f" />
 
 -Diseños de Interfaces en FIGMA-
 
