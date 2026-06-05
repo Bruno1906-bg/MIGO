@@ -59,6 +59,7 @@ https://universi799-my.sharepoint.com/:w:/g/personal/2402044_
 -Link de Repo Proyecto Migo-
 
 https://github.com/Bruno1906-bg/MIGO
+https://github.com/2402015-crypto/Migo_Backend
 
 
 
