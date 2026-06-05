@@ -42,7 +42,15 @@ https://www.figma.com/design/nCnZo8WIk8Tdqsu60nVrwZ/Wireframes?node-id=0-1&p=f&t
 
 -Sketches del diseño-
 
-<img width="900" height="1200" alt="Sketches-Migo" src="https://github.com/user-attachments/assets/03b7e0de-56f5-470c-aa85-ee2ea8da9acb" />
+<img width="900" height="900" alt="Sketches-Migo" src="https://github.com/user-attachments/assets/03b7e0de-56f5-470c-aa85-ee2ea8da9acb" />
+
+<img width="900" height="900" alt="Sketches-Migo2" src="https://github.com/user-attachments/assets/71578d6a-274e-4070-b48a-509bcb5c5f94" />
+
+<img width="1046" height="804" alt="Sketches-Migo3" src="https://github.com/user-attachments/assets/3c16eb47-3e6b-48e3-ad39-6d9734dadeaa" />
+
+-Link Presentacion Canva-
+
+https://canva.link/invmwm15xp6j6zp
 
 -Plantilla de reuniones SCRUM-
 
