@@ -1,0 +1,108 @@
+/* ==========================================================================
+   MIGO - ESTILOS DE PUBLICACIÓN (Paleta Oficial)
+   ========================================================================== */
+
+body { 
+    font-family: 'Segoe UI', sans-serif; 
+    background: #f4f7f6; 
+    margin: 0; 
+}
+
+.modal-overlay { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+}
+
+.modal-card { 
+    background: white; 
+    width: 90%; 
+    max-width: 800px; 
+    padding: 40px; 
+    border-radius: 20px; 
+    box-shadow: 0 10px 30px rgba(11, 29, 40, 0.15); 
+    border-top: 6px solid #20b2aa; /* Acento Turquesa superior */
+}
+
+header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 30px; 
+}
+
+header h2 { 
+    color: #0b1d28; /* Azul Marino */
+    margin: 0; 
+}
+
+.close-btn { 
+    color: #0b1d28; 
+    font-weight: bold; 
+    text-decoration: none; 
+}
+
+.form-grid { 
+    display: grid; 
+    grid-template-columns: 1.5fr 1fr; 
+    gap: 30px; 
+}
+
+.field label { 
+    display: block; 
+    font-weight: 600; 
+    color: #0b1d28; /* Azul Marino */
+    margin-bottom: 8px; 
+}
+
+input, select, textarea { 
+    width: 100%; 
+    padding: 12px; 
+    border: 2px solid #e2e8f0; 
+    border-radius: 10px; 
+    box-sizing: border-box; 
+    transition: 0.3s;
+}
+
+input:focus, textarea:focus { 
+    border-color: #20b2aa; /* Turquesa al enfocar */
+    outline: none; 
+}
+
+/* Área de subida de fotos */
+.upload-area { 
+    height: 250px; 
+    border: 2px dashed #20b2aa; /* Turquesa */
+    background: #f8fafc;
+    border-radius: 15px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    cursor: pointer; 
+    color: #20b2aa;
+    transition: 0.3s; 
+}
+
+.upload-area:hover { 
+    background: #e6f7f6; 
+}
+
+/* Botón Principal */
+.btn-primary { 
+    width: 100%; 
+    padding: 15px; 
+    margin-top: 20px;
+    background: #20b2aa; /* Turquesa MIGO */
+    color: white; 
+    border: none; 
+    border-radius: 10px; 
+    font-size: 16px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: 0.3s;
+}
+
+.btn-primary:hover { 
+    background: #0b1d28; /* Azul Marino al pasar el mouse */
+}

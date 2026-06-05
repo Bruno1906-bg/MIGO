@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="ScreenPublicacion.css">
+    <title>Migo | Nueva Publicación</title>
+</head>
+<body>
+    <div class="modal-overlay">
+        <div class="modal-card">
+            <header>
+                <h2>Nueva Publicación</h2>
+                <a href="../ScreenDashboard/dashboard.html" class="close-btn">✕</a>
+            </header>
+
+            <form id="formPublicacion">
+                <div class="form-grid">
+                    <div class="col-inputs">
+                        <div class="field">
+                            <label>¿Qué sucede?</label>
+                            <select id="tipo" required>
+                                <option value="busca">Se busca</option>
+                                <option value="adopcion">Adopción</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Nombre de la mascota</label>
+                            <input type="text" id="nombre" placeholder="Ej. Firulais" required>
+                        </div>
+                        <div class="field">
+                            <label>Colonia</label>
+                            <input type="text" id="colonia" placeholder="¿Dónde ocurrió?" required>
+                        </div>
+                        <div class="field">
+                            <label>Descripción</label>
+                            <textarea id="descripcion" placeholder="Detalles importantes..." required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-photo">
+                        <div class="upload-area" id="dropArea">
+                            <input type="file" id="fotoInput" hidden accept="image/*">
+                            <div class="upload-content">
+                                <span>＋</span>
+                                <p>Subir foto</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary">Publicar Reporte</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="ScreenPublicacion.js"></script>
+</body>
+</html>

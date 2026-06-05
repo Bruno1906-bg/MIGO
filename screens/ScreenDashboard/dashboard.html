@@ -3,9 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dashboard</title>
+    <title>MIGO || Panel de Publicaciones</title>
+    <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
-    <img src="../../img/perrito.webp">
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="../../img/LogoMigo.jpeg" alt="MIGO Logo">
+        </div>
+        <nav class="sidebar-menu">
+            <a href="#" class="menu-item active"><i>°</i> Publicaciones</a>
+            <a href="#" class="menu-item"><i>°</i> Mi Perfil</a>
+            <a href="#" class="menu-item"><i>°</i> Directorio de Veterinarios</a>
+            <a href="#" class="menu-item"><i>°</i> Ajustes</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="../ScreenLogin/login.html" class="logout-link">Cerrar Sesión</a>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        
+        <header class="top-bar">
+            <div class="search-box">
+                <input type="text" placeholder="Busca por raza o ubicacion">
+            </div>
+            <a href="../ScreenCrearPublicacion/ScreenPublicacion.html" style="text-decoration: none;">
+    <button class="btn-create-trigger">+ Nueva Publicación</button>
+</a>
+        </header>
+
+        <main class="feed-container">
+            <h2 class="feed-title">Reportes Recientes en la Comunidad</h2>
+            
+            <div class="publications-grid" id="publicationsGrid"></div>
+        </main>
+    </div>
+
+    <script src="dashboard.js"></script>
 </body>
 </html>
