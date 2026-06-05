@@ -21,7 +21,7 @@ https://universi799-my.sharepoint.com/:x:/g/personal/2402044_utrivieramaya_edu_m
 
 -Metricas y Parametros en EXCEL-
 
-[ACT2-DASHBOARD METRICAS PRODUCTIVIDAD EQUIPO.xlsm](https://github.com/user-attachments/files/28616776/ACT2-DASHBOARD.METRICAS.PRODUCTIVIDAD.EQUIPO.xlsm)
+[Dashboard Excel.xlsm](https://github.com/user-attachments/files/28622740/Dashboard.Excel.xlsm)
 
 -Plantilla IEEE8.30/Requerimientos-
 
@@ -70,6 +70,10 @@ https://universi799-my.sharepoint.com/:w:/g/personal/2402044_
 [Backend](https://github.com/2402015-crypto/Migo_Backend)
 
 -Actividades con el profe Giovanny-
+
+[ACT6-EVIDENCIAS_MIGO.pdf](https://github.com/user-attachments/files/28622734/ACT6-EVIDENCIAS_MIGO.pdf)
+
+[ACT6-Plan de metricas y requerimientos.pdf](https://github.com/user-attachments/files/28622733/ACT6-Plan.de.metricas.y.requerimientos.pdf)
 
 [ACT5- DASHBOARD METRICAS PRODUCTIVIDAD - Migo (1).pdf](https://github.com/user-attachments/files/28622184/ACT5-.DASHBOARD.METRICAS.PRODUCTIVIDAD.-.Migo.1.pdf)
 
