@@ -13,26 +13,44 @@
                 <a href="../ScreenDashboard/dashboard.html" class="close-btn">✕</a>
             </header>
 
-            <form id="formPublicacion">
+            <form id="formPublicacion" novalidate>
                 <div class="form-grid">
                     <div class="col-inputs">
                         <div class="field">
-                            <label>¿Qué sucede?</label>
+                            <label for="tipo">¿Qué sucede?</label>
                             <select id="tipo" required>
-                                <option value="busca">Se busca</option>
-                                <option value="adopcion">Adopción</option>
+                                <option value="">Selecciona una opción</option>
                             </select>
                         </div>
+
                         <div class="field">
-                            <label>Nombre de la mascota</label>
-                            <input type="text" id="nombre" placeholder="Ej. Firulais" required>
+                            <label for="nombre_pet">Nombre de la mascota</label>
+                            <input type="text" id="nombre_pet" placeholder="Ej. Firulais" required>
                         </div>
+
                         <div class="field">
-                            <label>Colonia</label>
-                            <input type="text" id="colonia" placeholder="¿Dónde ocurrió?" required>
+                            <label for="especie">Especie</label>
+                            <select id="especie" required>
+                                <option value="">Selecciona una especie</option>
+                            </select>
                         </div>
+
                         <div class="field">
-                            <label>Descripción</label>
+                            <label for="colonia">Colonia</label>
+                            <select id="colonia" required>
+                                <option value="">Selecciona una colonia</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="estado">Estado de publicación</label>
+                            <select id="estado" required>
+                                <option value="">Selecciona un estado</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="descripcion">Descripción</label>
                             <textarea id="descripcion" placeholder="Detalles importantes..." required></textarea>
                         </div>
                     </div>
@@ -45,9 +63,12 @@
                                 <p>Subir foto</p>
                             </div>
                         </div>
+                        <p class="upload-note">La foto se guardará en el catálogo de imágenes si el backend devuelve el ID de la publicación.</p>
+                        <input type="hidden" id="id_usuario">
                     </div>
                 </div>
                 <button type="submit" class="btn-primary">Publicar Reporte</button>
+                <div class="form-message" id="publication-message" role="alert" aria-live="polite"></div>
             </form>
         </div>
     </div>

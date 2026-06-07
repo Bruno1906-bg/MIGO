@@ -1,5 +1,10 @@
 (() => {
     const API_BASE_URL = 'https://ga6f1d821261f2a-migodb.adb.mx-queretaro-1.oraclecloudapps.com/ords/migo_user';
+    const API_PATHS = {
+        colonias: '/colonias/colonias',
+        usuarios: '/usuarios/usuarios',
+        login: '/login/login',
+    };
 
     const loginForm = document.getElementById('login-form');
     const registerForm = document.getElementById('register-form');
@@ -94,11 +99,13 @@
         return payload;
     };
 
+    const buildApiUrl = (path) => `${API_BASE_URL}${path}`;
+
     const getSelectedColonias = () => coloniaData.slice();
 
     const loadAllColonias = async () => {
         const colonias = [];
-        let nextUrl = `${API_BASE_URL}/colonias/?limit=1000`;
+        let nextUrl = buildApiUrl(API_PATHS.colonias);
         let guard = 0;
 
         while (nextUrl && guard < 20) {
@@ -296,27 +303,15 @@
         }
 
         try {
-            const loginPaths = ['/usuarios/login', '/usuarios/login/', '/usuarios_api/login', '/usuarios_api/login/'];
-            let payload = null;
-            let lastError = null;
+            const payload = await fetchJson(buildApiUrl(API_PATHS.login), {
+                method: 'POST',
+                body: JSON.stringify({ correo, contrasena }),
+            });
 
-            for (const path of loginPaths) {
-                try {
-                    payload = await fetchJson(`${API_BASE_URL}${path}`, {
-                        method: 'POST',
-                        body: JSON.stringify({ correo, contrasena }),
-                    });
-                    break;
-                } catch (error) {
-                    lastError = error;
-                }
-            }
+            const loginStatus = String(payload?.status || '').toLowerCase();
+            const hasUserId = Number.isFinite(Number(payload?.id_usuario ?? payload?.ID_USUARIO));
 
-            if (!payload) {
-                throw lastError || new Error('No se pudo iniciar sesión.');
-            }
-
-            if (String(payload?.status || '').toLowerCase() !== 'success') {
+            if (loginStatus && loginStatus !== 'success' && !hasUserId) {
                 throw new Error(payload?.message || 'Credenciales inválidas');
             }
 
@@ -367,7 +362,7 @@
         }
 
         try {
-            const payload = await fetchJson(`${API_BASE_URL}/usuarios/`, {
+            const payload = await fetchJson(buildApiUrl(API_PATHS.usuarios), {
                 method: 'POST',
                 body: JSON.stringify({
                     nombre,

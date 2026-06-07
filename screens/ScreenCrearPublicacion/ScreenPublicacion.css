@@ -49,6 +49,12 @@ header h2 {
     gap: 30px; 
 }
 
+.col-photo {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
 .field label { 
     display: block; 
     font-weight: 600; 
@@ -86,6 +92,28 @@ input:focus, textarea:focus {
 
 .upload-area:hover { 
     background: #e6f7f6; 
+}
+
+.upload-note {
+    margin: 0;
+    color: #4a5568;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.form-message {
+    min-height: 1.1rem;
+    margin-top: 16px;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.form-message.success {
+    color: #1f8a70;
+}
+
+.form-message.error {
+    color: #c0392b;
 }
 
 /* Botón Principal */
