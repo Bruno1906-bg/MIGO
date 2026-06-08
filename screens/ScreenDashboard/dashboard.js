@@ -238,60 +238,85 @@
         }
     };
 
-    const getPublicationTitle = (post) => pickValue(post, ['nombre_pet', 'nombre', 'NOMBRE_PET', 'NOMBRE']) || 'Sin nombre';
-    const getPublicationLocation = (post) => pickValue(post, ['nombre_colonia', 'colonia_nombre', 'COLONIA', 'colonia', 'id_colonia', 'ID_COLONIA']) || 'No especificada';
-    const getPublicationDescription = (post) => pickValue(post, ['descripcion', 'DESCRIPCION']) || '';
-    const getPublicationDate = (post) => pickValue(post, ['fecha_registro', 'fecha', 'FECHA_REGISTRO', 'FECHA']) || '';
-    const getPublicationImage = (post) => pickValue(post, ['ruta_imagen', 'imagen', 'RUTA_IMAGEN', 'IMAGEN']) || '';
-    const getPublicationLabel = (post) => pickValue(post, ['nombre_tipo', 'tipo_nombre', 'nombre_estado', 'estado_nombre', 'tipo_reporte', 'TIPO_REPORTE', 'tipo', 'TIPO']) || 'Publicación';
+    // Nombre de la mascota
+    const getPublicationTitle = (post) => post.nombre_pet || 'Sin nombre';
+
+    // Colonia: usa catálogo para traducir id_colonia → nombre_colonia
+    const getPublicationLocation = (post) => {
+        const colonia = catalogos.colonias.find(c => c.id_colonia == post.id_colonia);
+        return colonia ? colonia.nombre_colonia : 'No especificada';
+    };
+
+    // Descripción
+    const getPublicationDescription = (post) => post.descripcion || '';
+
+    // Fecha
+    const getPublicationDate = (post) => post.fecha_publi || '';
+
+    // Imagen: por ahora tu backend no manda ruta_imagen, así que quedará vacío
+    const getPublicationImage = (post) => post.ruta_imagen || '';
+
+    // Etiqueta: usa catálogo de tipos para traducir id_tipo → nombre_tipo
+    const getPublicationLabel = (post) => {
+        const tipo = catalogos.tipos.find(t => t.id_tipo == post.id_tipo);
+        return tipo ? tipo.nombre_tipo : 'Publicación';
+    };
 
     const renderizarGrid = (listaPublicaciones) => {
-        const grid = document.getElementById('publicationsGrid');
-        if (!grid) return;
+    const grid = document.getElementById('publicationsGrid');
+    if (!grid) return;
 
-        grid.innerHTML = '';
+    grid.innerHTML = '';
 
-        if (listaPublicaciones.length === 0) {
-            grid.innerHTML = '<p class="no-posts">No se encontraron reportes.</p>';
-            return;
-        }
+    if (listaPublicaciones.length === 0) {
+        grid.innerHTML = '<p class="no-posts">No se encontraron reportes.</p>';
+        return;
+    }
 
-        listaPublicaciones.forEach((post) => {
-            const nombre = getPublicationTitle(post);
-            const colonia = getPublicationLocation(post);
-            const descripcion = getPublicationDescription(post);
-            const fecha = getPublicationDate(post);
-            const imagen = getPublicationImage(post);
-            const etiqueta = getPublicationLabel(post);
-            const badgeClass = normalizeText(etiqueta).replace(/[^a-z0-9_-]/g, '') || 'publicacion';
+    for (const post of listaPublicaciones) {
+        const nombre = post.nombre_pet || 'Sin nombre';
+        const coloniaObj = catalogos.colonias.find(c => c.id_colonia == post.id_colonia);
+        const colonia = coloniaObj ? coloniaObj.nombre_colonia : 'No especificada';
+        const descripcion = post.descripcion || '';
+        const fecha = post.fecha_publi || '';
+        const tipoObj = catalogos.tipos.find(t => t.id_tipo == post.id_tipo);
+        const etiqueta = tipoObj ? tipoObj.nombre_tipo : 'Publicación';
+        const badgeClass = etiqueta.toLowerCase().replace(/[^a-z0-9_-]/g, '') || 'publicacion';
 
-            const imageMarkup = imagen
-                ? `<img class="card-img" src="${imagen}" alt="${nombre}">`
-                : `<div class="card-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e6fffa,#f7fafc);color:#0b1d28;font-weight:700;">${nombre.slice(0, 1).toUpperCase()}</div>`;
+        // 🔹 Ahora la foto ya viene en el JSON de publicaciones
+        const imagen = post.ruta_imagen || '';
 
-            const cardHTML = `
-                <article class="post-card">
-                    <div class="card-image-wrapper">
-                        ${imageMarkup}
-                        <span class="status-badge ${badgeClass}">${etiqueta.toUpperCase()}</span>
+        const imageMarkup = imagen
+            ? `<img class="card-img" src="data:image/jpeg;base64,${imagen}" alt="${nombre}">`
+            : `<div class="card-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e6fffa,#f7fafc);color:#0b1d28;font-weight:700;">${nombre.slice(0, 1).toUpperCase()}</div>`;
+
+        const cardHTML = `
+            <article class="post-card">
+                <div class="card-image-wrapper">
+                    ${imageMarkup}
+                    <span class="status-badge ${badgeClass}">${etiqueta.toUpperCase()}</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span class="card-location">📍 ${colonia}</span>
+                        <span class="card-date">${fecha}</span>
                     </div>
-                    <div class="card-content">
-                        <div class="card-meta">
-                            <span class="card-location">📍 ${colonia}</span>
-                            <span class="card-date">${fecha}</span>
-                        </div>
-                        <h3 class="card-pet-name">${nombre}</h3>
-                        <p class="card-description">${descripcion}</p>
-                        <div class="card-footer">
-                            <button class="btn-card-action primary" type="button">Contactar</button>
-                        </div>
+                    <h3 class="card-pet-name">${nombre}</h3>
+                    <p class="card-description">${descripcion}</p>
+                    <div class="card-footer">
+                        <button class="btn-card-action primary" type="button">Contactar</button>
                     </div>
-                </article>
-            `;
+                </div>
+            </article>
+        `;
 
-            grid.innerHTML += cardHTML;
-        });
-    };
+        grid.innerHTML += cardHTML;
+    }
+};
+
+
+
+
 
     const initializeDashboard = async () => {
         try {

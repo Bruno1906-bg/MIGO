@@ -117,7 +117,15 @@
         const file = event.target.files?.[0];
         if (!file) { imagenBase64 = ''; syncPhotoPreview(''); return; }
         const reader = new FileReader();
-        reader.onload = (e) => { imagenBase64 = String(e.target?.result || ''); syncPhotoPreview(imagenBase64); };
+        reader.onload = (e) => {
+            const fullDataUrl = String(e.target?.result || '');
+            // 🔹 Quitar el encabezado "data:image/...;base64,"
+            const base64Only = fullDataUrl.split(',')[1] || '';
+            imagenBase64 = base64Only;
+            // Para la vista previa sí usamos el DataURL completo
+            syncPhotoPreview(fullDataUrl);
+            console.log("Imagen Base64 (solo datos):", imagenBase64.substring(0, 100));
+        };
         reader.readAsDataURL(file);
     };
 
@@ -185,7 +193,9 @@
                     await fetch(`${API_BASE_URL}/fotos_publi/publicaciones/${publicationId}/fotos`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ ruta_imagen: imagenBase64 }),
+                        body: JSON.stringify({
+                            ruta_imagen: imagenBase64
+                        }),
                     });
                 } catch {
                     setMessage('La foto local no se pudo asociar.', 'error');
