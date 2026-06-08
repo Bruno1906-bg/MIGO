@@ -1,5 +1,5 @@
 (() => {
-    const API_BASE_URL = 'https://ga6f1d821261f2a-migodb.adb.mx-queretaro-1.oraclecloudapps.com/ords/migo_user';
+    const API_BASE_URL = 'http://localhost:4000/api';
     const API_PATHS = {
         colonias: '/colonias/colonias',
         usuarios: '/usuarios/usuarios',
@@ -372,7 +372,7 @@
                     telefono,
                     direccion,
                     id_colonia: coloniaSeleccionada.id_colonia,
-                    rol: 'ciudadano',
+                    rol: 'usuario',
                     estado_cuenta: 'activo',
                 }),
             });
